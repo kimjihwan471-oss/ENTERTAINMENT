@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASTRA ENTERTAINMENT | MAKE YOUR MOMENT</title>
+<title>ASTRIX ENTERTAINMENT | MAKE YOUR MOMENT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -140,7 +140,7 @@
         margin: 0 auto;
     }
 
-    /* ===== ASTRA 로고 ===== */
+    /* ===== ASTRIX 로고 ===== */
     .logo-mark {
         position: relative;
         display: inline-flex;
@@ -667,9 +667,31 @@
     }
 }
 
+
+    #siteEditBtn {
+        background: #17140a;
+        color: var(--gold-soft);
+        border: 1px solid rgba(212,175,122,0.25);
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        cursor: pointer;
+    }
+    #siteEditBtn:hover { background: rgba(212,175,122,0.12); }
+
 </style>
 </head>
 <body>
+
+<script>
+(function () {
+    if (location.pathname === '/astra' || location.pathname === '/astra/') {
+        const newPath = '/astrix' + location.search + location.hash;
+        history.replaceState(null, '', newPath);
+    }
+})();
+</script>
+
 
 <div class="starfield" id="starfield"></div>
 
@@ -710,7 +732,7 @@
 <section id="artists" class="section reveal">
     <p class="eyebrow">OUR STARS</p>
     <h2>ARTISTS</h2>
-    <p class="section-desc">ASTRA와 함께 무대를 채워가는 아티스트들을 소개합니다.</p>
+    <p class="section-desc">ASTRIX와 함께 무대를 채워가는 아티스트들을 소개합니다.</p>
     <div class="artist-grid" id="artistGrid"></div>
     <button class="add-btn admin-only" id="addArtistBtn">+ 아티스트 추가</button>
 </section>
@@ -718,7 +740,7 @@
 <section id="representative" class="section representative-section reveal">
     <p class="eyebrow">LEADERSHIP</p>
     <h2>REPRESENTATIVE</h2>
-    <p class="section-desc">ASTRA ENTERTAINMENT를 이끌며 회사의 방향과 콘텐츠 전반을 총괄합니다.</p>
+    <p class="section-desc">ASTRIX ENTERTAINMENT를 이끌며 회사의 방향과 콘텐츠 전반을 총괄합니다.</p>
 
     <div class="representative-card">
         <div class="representative-intro">
@@ -726,7 +748,7 @@
             <div>
                 <span class="representative-label">REPRESENTATIVE</span>
                 <h3>연우</h3>
-                <p class="representative-title">대표 · ASTRA ENTERTAINMENT</p>
+                <p class="representative-title">대표 · ASTRIX ENTERTAINMENT</p>
             </div>
         </div>
 
@@ -744,7 +766,7 @@
         <div class="career">
             <div class="career-heading">CAREER</div>
             <ul>
-                <li><b>현)</b> ASTRA ENTERTAINMENT 대표</li>
+                <li><b>현)</b> ASTRIX ENTERTAINMENT 대표</li>
                 <li><b>현)</b> 사이버 코어 매니저</li>
                 <li><b>현)</b> 사이버 코어 편집자</li>
                 <li><b>현)</b> 뤼미에르 패밀리</li>
@@ -769,7 +791,7 @@
 <section id="news" class="section reveal">
     <p class="eyebrow">LATEST</p>
     <h2>NEWS</h2>
-    <p class="section-desc">ASTRA ENTERTAINMENT의 공지와 새로운 소식입니다.</p>
+    <p class="section-desc">ASTRIX ENTERTAINMENT의 공지와 새로운 소식입니다.</p>
     <div class="news-list" id="newsList"></div>
     <button class="add-btn admin-only" id="addNewsBtn">+ 소식 추가</button>
 </section>
@@ -777,7 +799,7 @@
 <footer class="site-footer">
     <a class="logo-mark" href="#home" style="margin:0 auto 18px;">
         <span class="logo-star">✦</span>
-        <span class="logo-word">ASTRA</span>
+        <span class="logo-word">ASTRIX</span>
         <span class="logo-subword">ENTERTAINMENT</span>
     </a>
     <p>&copy; 2026 ASTRIX. All rights reserved.</p>
@@ -786,7 +808,10 @@
 
 <div class="admin-banner" id="adminBanner">
     <span>★ 관리자 모드가 활성화되어 있습니다</span>
-    <button id="adminExit">종료</button>
+    <div style="display:flex;gap:8px;align-items:center;">
+        <button id="siteEditBtn" type="button">게시된 내용 편집</button>
+        <button id="adminExit">종료</button>
+    </div>
 </div>
 
 <!-- 관리자 로그인 모달 -->
@@ -805,6 +830,47 @@
     </div>
 </div>
 
+
+<!-- 사이트 전체 게시 내용 편집 모달 -->
+<div class="modal-overlay" id="siteEditModal">
+    <div class="modal">
+        <h3>게시된 내용 전체 편집</h3>
+        <div class="modal-scroll-content">
+            <div class="field"><label>사이트 제목</label><input id="s-pageTitle"></div>
+
+            <div class="field"><label>HOME 메인 문구</label><input id="s-heroTitle"></div>
+            <div class="field"><label>HOME 설명</label><textarea id="s-heroSub"></textarea></div>
+
+            <div class="field"><label>ARTISTS 섹션 제목</label><input id="s-artistsTitle"></div>
+            <div class="field"><label>ARTISTS 설명</label><textarea id="s-artistsDesc"></textarea></div>
+
+            <div class="field"><label>REPRESENTATIVE 섹션 제목</label><input id="s-repTitle"></div>
+            <div class="field"><label>REPRESENTATIVE 설명</label><textarea id="s-repDesc"></textarea></div>
+
+            <div class="field"><label>대표 이름</label><input id="s-repName"></div>
+            <div class="field"><label>대표 직급 / 소속</label><input id="s-repPosition"></div>
+            <div class="field"><label>대표 담당</label><input id="s-repDuty"></div>
+            <div class="field"><label>대표 분야</label><input id="s-repField"></div>
+            <div class="field"><label>대표 경력</label>
+                <textarea id="s-repCareer" placeholder="한 줄에 하나씩 입력"></textarea>
+            </div>
+
+            <div class="field"><label>SCHEDULE 섹션 제목</label><input id="s-scheduleTitle"></div>
+            <div class="field"><label>SCHEDULE 설명</label><textarea id="s-scheduleDesc"></textarea></div>
+
+            <div class="field"><label>NEWS 섹션 제목</label><input id="s-newsTitle"></div>
+            <div class="field"><label>NEWS 설명</label><textarea id="s-newsDesc"></textarea></div>
+
+            <div class="field"><label>푸터 문구</label><input id="s-footerText"></div>
+            <p class="modal-error" id="siteEditError"></p>
+        </div>
+        <div class="modal-actions">
+            <button class="btn" id="siteEditCancel">취소</button>
+            <button class="btn primary" id="siteEditSave">전체 저장</button>
+        </div>
+    </div>
+</div>
+
 <!-- 아티스트/일정/뉴스 추가·수정 공용 모달 -->
 <div class="modal-overlay" id="formModal">
     <div class="modal" id="formModalBody"></div>
@@ -813,7 +879,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
-    import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, onSnapshot, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCWaxlx6XXDy2Wl0RNrR3ARlzVbUy3xIaI",
@@ -842,10 +908,10 @@
         { date: '2026-09-05', title: 'STELLARIS 정규 2집 컴백 쇼케이스', artist: 'STELLARIS', type: '쇼케이스' },
         { date: '2026-09-12', title: 'ORION BOYS 팬미팅', artist: 'ORION BOYS', type: '팬미팅' },
         { date: '2026-09-20', title: 'SERA 단독 콘서트 〈Nightfall〉', artist: 'SERA', type: '콘서트' },
-        { date: '2026-10-02', title: 'ASTRA 신인 아티스트 쇼케이스', artist: 'ASTRA', type: '행사' }
+        { date: '2026-10-02', title: 'ASTRIX 신인 아티스트 쇼케이스', artist: 'ASTRIX', type: '행사' }
     ];
     const DEFAULT_NEWS = [
-        { date: '2026-08-25', title: 'ASTRA ENTERTAINMENT, 신인 개발 프로젝트 공식 발표', content: 'ASTRA ENTERTAINMENT가 차세대 아티스트 발굴을 위한 신인 개발 프로젝트를 새롭게 시작합니다. 오디션 일정은 추후 공식 채널을 통해 안내됩니다.', imageUrl: '' },
+        { date: '2026-08-25', title: 'ASTRIX ENTERTAINMENT, 신인 개발 프로젝트 공식 발표', content: 'ASTRIX ENTERTAINMENT가 차세대 아티스트 발굴을 위한 신인 개발 프로젝트를 새롭게 시작합니다. 오디션 일정은 추후 공식 채널을 통해 안내됩니다.', imageUrl: '' },
         { date: '2026-08-10', title: 'STELLARIS, 첫 번째 월드투어 확정', content: 'STELLARIS의 첫 월드투어가 2026년 하반기 아시아 지역을 시작으로 확정되었습니다. 자세한 일정은 SCHEDULE 페이지에서 확인하실 수 있습니다.', imageUrl: '' },
         { date: '2026-07-28', title: 'ORION BOYS 신곡 뮤직비디오 공개', content: 'ORION BOYS의 새로운 싱글과 뮤직비디오가 공개되었습니다. 많은 관심과 사랑 부탁드립니다.', imageUrl: '' }
     ];
@@ -855,42 +921,215 @@
     let news = [];
     let currentImageBase64 = '';
 
+    const DEFAULT_SITE_SETTINGS = {
+        pageTitle: 'ASTRIX ENTERTAINMENT | MAKE YOUR MOMENT',
+        heroTitle: 'MAKE YOUR MOMENT',
+        heroSub: '별처럼 빛나는 아티스트와 함께, 새로운 이야기를 만들어갑니다.',
+        artistsTitle: 'ARTISTS',
+        artistsDesc: 'ASTRIX와 함께 무대를 채워가는 아티스트들을 소개합니다.',
+        repTitle: 'REPRESENTATIVE',
+        repDesc: 'ASTRIX ENTERTAINMENT를 이끌며 회사의 방향과 콘텐츠 전반을 총괄합니다.',
+        repName: '연우',
+        repPosition: '대표 · ASTRIX ENTERTAINMENT',
+        repDuty: '회사 운영 및 총괄',
+        repField: '기획 · 운영 · 콘텐츠 · 아티스트 관리',
+        repCareer: [
+            '현) ASTRIX ENTERTAINMENT 대표',
+            '현) 사이버 코어 매니저',
+            '현) 사이버 코어 편집자',
+            '현) 뤼미에르 패밀리',
+            '전) TEMAGUMI 대표',
+            '전) SPOON BJ',
+            '전) 아프리카 (SOOP) BJ (동시송출)',
+            '전) 치지직 BJ (동시송출)',
+            '전) 유튜브 BJ (동시송출)'
+        ],
+        scheduleTitle: 'SCHEDULE',
+        scheduleDesc: '다가오는 방송과 콘텐츠, 무대 일정을 확인하세요.',
+        newsTitle: 'NEWS',
+        newsDesc: 'ASTRIX ENTERTAINMENT의 공지와 새로운 소식입니다.',
+        footerText: '© 2026 ASTRIX ENTERTAINMENT. All rights reserved.'
+    };
+
+    let siteSettings = { ...DEFAULT_SITE_SETTINGS };
+
+    function applySiteSettings() {
+        document.title = siteSettings.pageTitle || DEFAULT_SITE_SETTINGS.pageTitle;
+
+        const heroTitle = document.querySelector('.hero-title');
+        const heroSub = document.querySelector('.hero-sub');
+        if (heroTitle) heroTitle.textContent = siteSettings.heroTitle;
+        if (heroSub) heroSub.textContent = siteSettings.heroSub;
+
+        const artistsSection = document.getElementById('artists');
+        const repSection = document.getElementById('representative');
+        const scheduleSection = document.getElementById('schedule');
+        const newsSection = document.getElementById('news');
+
+        if (artistsSection) {
+            const h2 = artistsSection.querySelector('h2');
+            const desc = artistsSection.querySelector('.section-desc');
+            if (h2) h2.textContent = siteSettings.artistsTitle;
+            if (desc) desc.textContent = siteSettings.artistsDesc;
+        }
+        if (repSection) {
+            const h2 = repSection.querySelector('h2');
+            const desc = repSection.querySelector('.section-desc');
+            const name = repSection.querySelector('.representative-intro h3');
+            const position = repSection.querySelector('.representative-title');
+            const items = repSection.querySelectorAll('.rep-info-item strong');
+            const careerList = repSection.querySelector('.representative-career ul, .career-list, ul');
+            if (h2) h2.textContent = siteSettings.repTitle;
+            if (desc) desc.textContent = siteSettings.repDesc;
+            if (name) name.textContent = siteSettings.repName;
+            if (position) position.textContent = siteSettings.repPosition;
+            if (items[0]) items[0].textContent = siteSettings.repDuty;
+            if (items[1]) items[1].textContent = siteSettings.repField;
+
+            // Find the career list by looking for the list containing career entries.
+            const lists = repSection.querySelectorAll('ul');
+            if (lists.length) {
+                const list = lists[lists.length - 1];
+                list.innerHTML = (siteSettings.repCareer || []).map(v => `<li>${v}</li>`).join('');
+            }
+        }
+        if (scheduleSection) {
+            const h2 = scheduleSection.querySelector('h2');
+            const desc = scheduleSection.querySelector('.section-desc');
+            if (h2) h2.textContent = siteSettings.scheduleTitle;
+            if (desc) desc.textContent = siteSettings.scheduleDesc;
+        }
+        if (newsSection) {
+            const h2 = newsSection.querySelector('h2');
+            const desc = newsSection.querySelector('.section-desc');
+            if (h2) h2.textContent = siteSettings.newsTitle;
+            if (desc) desc.textContent = siteSettings.newsDesc;
+        }
+
+        const footer = document.querySelector('.site-footer p');
+        if (footer) footer.textContent = siteSettings.footerText;
+    }
+
+    function fillSiteEditForm() {
+        const s = siteSettings;
+        const values = {
+            's-pageTitle': s.pageTitle,
+            's-heroTitle': s.heroTitle,
+            's-heroSub': s.heroSub,
+            's-artistsTitle': s.artistsTitle,
+            's-artistsDesc': s.artistsDesc,
+            's-repTitle': s.repTitle,
+            's-repDesc': s.repDesc,
+            's-repName': s.repName,
+            's-repPosition': s.repPosition,
+            's-repDuty': s.repDuty,
+            's-repField': s.repField,
+            's-repCareer': (s.repCareer || []).join('\n'),
+            's-scheduleTitle': s.scheduleTitle,
+            's-scheduleDesc': s.scheduleDesc,
+            's-newsTitle': s.newsTitle,
+            's-newsDesc': s.newsDesc,
+            's-footerText': s.footerText
+        };
+        Object.entries(values).forEach(([id, value]) => {
+            const el = document.getElementById(id);
+            if (el) el.value = value ?? '';
+        });
+    }
+
+    function openSiteEditModal() {
+        fillSiteEditForm();
+        document.getElementById('siteEditError').textContent = '';
+        document.getElementById('siteEditModal').classList.add('open');
+    }
+
+    async function saveSiteSettings() {
+        const get = id => document.getElementById(id).value.trim();
+        const next = {
+            pageTitle: get('s-pageTitle'),
+            heroTitle: get('s-heroTitle'),
+            heroSub: get('s-heroSub'),
+            artistsTitle: get('s-artistsTitle'),
+            artistsDesc: get('s-artistsDesc'),
+            repTitle: get('s-repTitle'),
+            repDesc: get('s-repDesc'),
+            repName: get('s-repName'),
+            repPosition: get('s-repPosition'),
+            repDuty: get('s-repDuty'),
+            repField: get('s-repField'),
+            repCareer: document.getElementById('s-repCareer').value.split('\n').map(v => v.trim()).filter(Boolean),
+            scheduleTitle: get('s-scheduleTitle'),
+            scheduleDesc: get('s-scheduleDesc'),
+            newsTitle: get('s-newsTitle'),
+            newsDesc: get('s-newsDesc'),
+            footerText: get('s-footerText')
+        };
+
+        if (!next.pageTitle || !next.heroTitle) {
+            document.getElementById('siteEditError').textContent = '사이트 제목과 HOME 메인 문구는 필수입니다.';
+            return;
+        }
+
+        try {
+            await setDoc(doc(db, 'siteSettings', 'main'), next, { merge: true });
+            siteSettings = { ...siteSettings, ...next };
+            applySiteSettings();
+            document.getElementById('siteEditModal').classList.remove('open');
+        } catch (e) {
+            console.error('사이트 전체 내용 저장 실패:', e);
+            document.getElementById('siteEditError').textContent = '저장에 실패했습니다. Firebase 연결 및 권한을 확인하세요.';
+        }
+    }
+
+
     async function initFirestoreData() {
         try {
             const artistSnap = await getDocs(collection(db, "artists"));
             if (artistSnap.empty) {
-                for (let item of DEFAULT_ARTISTS) {
-                    await addDoc(collection(db, "artists"), item);
-                }
-                artists = [...DEFAULT_ARTISTS];
-            } else {
-                artists = [];
-                artistSnap.forEach(d => artists.push({ id: d.id, ...d.data() }));
+                for (const item of DEFAULT_ARTISTS) await addDoc(collection(db, "artists"), item);
             }
 
             const scheduleSnap = await getDocs(collection(db, "schedule"));
             if (scheduleSnap.empty) {
-                for (let item of DEFAULT_SCHEDULE) {
-                    await addDoc(collection(db, "schedule"), item);
-                }
-                schedule = [...DEFAULT_SCHEDULE];
-            } else {
-                schedule = [];
-                scheduleSnap.forEach(d => schedule.push({ id: d.id, ...d.data() }));
+                for (const item of DEFAULT_SCHEDULE) await addDoc(collection(db, "schedule"), item);
             }
 
             const newsSnap = await getDocs(collection(db, "news"));
             if (newsSnap.empty) {
-                for (let item of DEFAULT_NEWS) {
-                    await addDoc(collection(db, "news"), item);
-                }
-                news = [...DEFAULT_NEWS];
-            } else {
-                news = [];
-                newsSnap.forEach(d => news.push({ id: d.id, ...d.data() }));
+                for (const item of DEFAULT_NEWS) await addDoc(collection(db, "news"), item);
             }
 
-            renderAll();
+            const settingsRef = doc(db, 'siteSettings', 'main');
+            const settingsSnap = await getDoc(settingsRef);
+            if (!settingsSnap.exists()) {
+                await setDoc(settingsRef, DEFAULT_SITE_SETTINGS);
+            } else {
+                siteSettings = { ...DEFAULT_SITE_SETTINGS, ...settingsSnap.data() };
+                applySiteSettings();
+            }
+
+            // 실시간 동기화: 다른 기기에서 수정하면 새로고침 없이 반영됩니다.
+            onSnapshot(collection(db, "artists"), snap => {
+                artists = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                renderArtists();
+            });
+
+            onSnapshot(collection(db, "schedule"), snap => {
+                schedule = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                renderSchedule();
+            });
+
+            onSnapshot(collection(db, "news"), snap => {
+                news = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                renderNews();
+            });
+
+            onSnapshot(settingsRef, snap => {
+                if (snap.exists()) {
+                    siteSettings = { ...DEFAULT_SITE_SETTINGS, ...snap.data() };
+                    applySiteSettings();
+                }
+            });
         } catch (e) {
             console.error("Firebase 데이터 연동 오류:", e);
         }
@@ -1240,6 +1479,18 @@
     document.getElementById('addArtistBtn').addEventListener('click', () => openArtistModal(null));
     document.getElementById('addScheduleBtn').addEventListener('click', () => openScheduleModal(null));
     document.getElementById('addNewsBtn').addEventListener('click', () => openNewsModal(null));
+
+    document.getElementById('siteEditBtn').addEventListener('click', openSiteEditModal);
+    document.getElementById('siteEditCancel').addEventListener('click', () => {
+        document.getElementById('siteEditModal').classList.remove('open');
+    });
+    document.getElementById('siteEditSave').addEventListener('click', saveSiteSettings);
+    document.getElementById('siteEditModal').addEventListener('click', (e) => {
+        if (e.target.id === 'siteEditModal') {
+            document.getElementById('siteEditModal').classList.remove('open');
+        }
+    });
+
     formModal.addEventListener('click', (e) => { if (e.target === formModal) closeFormModal(); });
 
     const adminModal = document.getElementById('adminModal');
@@ -1248,11 +1499,11 @@
 
     function setAdminState(on) {
         document.body.classList.toggle('is-admin', on);
-        if (on) sessionStorage.setItem('astra_admin', 'true');
-        else sessionStorage.removeItem('astra_admin');
+        if (on) sessionStorage.setItem('astrix_admin', 'true');
+        else sessionStorage.removeItem('astrix_admin');
     }
 
-    if (sessionStorage.getItem('astra_admin') === 'true') setAdminState(true);
+    if (sessionStorage.getItem('astrix_admin') === 'true') setAdminState(true);
 
     document.getElementById('adminEntry').addEventListener('click', () => {
         if (document.body.classList.contains('is-admin')) {

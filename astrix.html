@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTRA ENTERTAINMENT - Official Platform</title>
+    <!-- 구글 폰트 및 아이콘 -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --bg-secondary: #0f1015;
+            --card-bg: #1f2833;
+            --card-hover: #2c3542;
+            --accent-color: #66fcf1;
+            --accent-dim: #45a29e;
+            --text-main: #c5c6c7;
+            --text-bright: #ffffff;
+            --danger-color: #ff5c5c;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        /* 스크롤바 디자인 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
+        /* 배경 별자리 효과 파티클 컨테이너 */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle at 50% 50%, #111622 0%, var(--bg-color) 100%);
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 0.9; transform: scale(1.2); }
+        }
+
+        /* 네비게이션 바 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 60px;
+            background: rgba(11, 12, 16, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-bright);
+            letter-spacing: 3px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--accent-color); }
+        .logo span { color: var(--accent-color); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            letter-spacing: 1px;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
+        }
+
+        .admin-btn {
+            background: transparent;
+            border: 1px solid var(--accent-dim);
+            color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .admin-btn:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.3);
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            background: rgba(102, 252, 241, 0.1);
+            border: 1px solid var(--accent-dim);
+            color: var(--accent-color);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem;
+            color: var(--text-bright);
+            margin-bottom: 20px;
+            letter-spacing: 6px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+            text-shadow: 0 0 30px rgba(102, 252, 241, 0.4);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* 공통 섹션 스타일 */
+        section {
+            padding: 120px 10% 100px 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--text-bright);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--text-main);
+            margin-bottom: 50px;
+            font-size: 0.95rem;
+        }
+
+        /* 대표 소개 섹션 */
+        .representative-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 60px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .rep-img {
+            width: 100%;
+            height: 400px;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            color: var(--accent-dim);
+            border: 2px dashed var(--accent-dim);
+        }
+
+        .rep-info h3 {
+            font-size: 2.2rem;
+            color: var(--text-bright);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .rep-info .position {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .rep-info p {
+            line-height: 1.9;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        /* 아티스트 섹션 (프로필 깔끔한 정리 & 클릭 유도형) */
+        .artist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .artist-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            padding: 35px 25px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(102, 252, 241, 0.15);
+            background: var(--card-hover);
+        }
+
+        .artist-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-dim);
+        }
+
+        .artist-card h4 {
+            font-size: 1.4rem;
+            color: var(--text-bright);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .artist-card span {
+            font-size: 0.85rem;
+            color: var(--accent-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* 깔끔하게 정리된 프로필 한마디 미리보기 배지 */
+        .artist-quote-preview {
+            background: rgba(102, 252, 241, 0.08);
+            border-left: 3px solid var(--accent-color);
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-bright);
+            font-style: italic;
+            margin-top: 15px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .artist-quote-preview i {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+        }
+
+        /* 스케줄 섹션 */
+        .schedule-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .schedule-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--accent-dim);
+        }
+
+        .schedule-item {
+            padding: 25px 0;
+            position: relative;
+            width: 50%;
+            left: 0;
+            padding-right: 50px;
+            text-align: right;
+        }
+
+        .schedule-item:nth-child(even) {
+            left: 50%;
+            padding-left: 50px;
+            padding-right: 0;
+            text-align: left;
+        }
+
+        .schedule-content {
+            background: var(--card-bg);
+            padding: 25px 30px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .schedule-content:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .schedule-date {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .schedule-content h4 {
+            color: var(--text-bright);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .schedule-content p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        /* 뉴스 및 공지 섹션 */
+        .news-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .news-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px 35px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .news-item:hover {
+            border-color: var(--accent-color);
+            background: var(--card-hover);
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .news-title {
+            color: var(--text-bright);
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .news-date {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .news-body {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            display: none;
+            line-height: 1.7;
+        }
+
+        .news-item.active .news-body { display: block; }
+
+        /* 공통 모달창 스타일 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .admin-modal {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-dim);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .admin-modal h3 {
+            color: var(--text-bright);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 아티스트 상세 프로필 모달 전용 스타일 */
+        .profile-modal-content {
+            text-align: center;
+        }
+
+        .profile-modal-avatar {
+            width: 90px;
+            height: 90px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .profile-modal-quote {
+            background: rgba(102, 252, 241, 0.08);
+            border: 1px solid var(--accent-dim);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: var(--text-bright);
+            font-size: 1.05rem;
+            font-style: italic;
+        }
+
+        .profile-modal-desc {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            text-align: left;
+            margin-bottom: 25px;
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-main); font-size: 0.9rem; margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-bright);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(102, 252, 241, 0.2);
+        }
+
+        .modal-actions { display: flex; gap: 15px; margin-top: 30px; }
+        .modal-actions button { flex: 1; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 0.95rem; }
+        .btn-submit { background: var(--accent-color); color: var(--bg-color); border: none; }
+        .btn-submit:hover { box-shadow: 0 0 15px rgba(102, 252, 241, 0.4); }
+        .btn-close { background: transparent; color: var(--text-main); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .btn-close:hover { background: rgba(255, 255, 255, 0.05); color: var(--text-bright); }
+
+        /* 관리자 활성화 플로팅 바 */
+        .admin-control-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-color);
+            padding: 12px 25px;
+            border-radius: 30px;
+            z-index: 1500;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .admin-control-bar.active { display: flex; }
+        .admin-control-bar span { color: var(--accent-color); font-weight: 600; font-size: 0.9rem; }
+        .admin-control-bar button { background: var(--accent-color); color: var(--bg-color); border: none; padding: 6px 14px; border-radius: 15px; font-weight: 600; cursor: pointer; font-size: 0.8rem; }
+
+        /* 푸터 */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            background: #07080a;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        @media(max-width: 900px) {
+            header { padding: 20px 30px; }
+            nav ul { display: none; }
+            .representative-grid { grid-template-columns: 1fr; padding: 40px; }
+            .hero h1 { font-size: 3rem; }
+            .schedule-timeline::before { left: 20px; }
+            .schedule-item { width: 100%; left: 0 !important; padding-left: 45px !important; text-align: left !important; padding-right: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 밤하늘 별 파티클 배경 -->
+    <div class="starfield" id="starfield"></div>
+
+    <!-- 네비게이션 바 -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-meteor"></i> ASTRA <span>ENTERTAINMENT</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#artists">Artists</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#news">News</a></li>
+                <li><button class="admin-btn" onclick="openAdminModal()">Admin Login</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-badge">Global Entertainment Leader</div>
+        <h1>MAKE YOUR <span>MOMENT</span></h1>
+        <p>Astra Entertainment Official Platform</p>
+        <div class="scroll-down">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- 대표 소개 섹션 -->
+    <section id="about">
+        <h2 class="section-title">REPRESENTATIVE</h2>
+        <div class="representative-grid">
+            <div class="rep-img">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="rep-info">
+                <h3>Astra CEO & Founder</h3>
+                <span class="position">Chief Executive Officer</span>
+                <p>아스트라 엔터테인먼트는 무한한 잠재력과 독창적인 재능을 가진 아티스트들과 함께 새로운 문화적 지평을 열어갑니다.</p>
+                <p>글로벌 음악 시장을 선도하는 혁신적인 프로듀싱과 체계적인 매니지먼트 시스템을 통해 전 세계 팬들에게 감동을 전하고, 대중문화의 새로운 기준을 제시하겠습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 아티스트 섹션 (프로필 깔끔 정리 & 클릭 시 한마디 상세 보기) -->
+    <section id="artists">
+        <h2 class="section-title">ARTISTS</h2>
+        <p class="section-desc">아티스트 카드를 클릭하면 상세 프로필과 한마디 메시지를 확인할 수 있습니다.</p>
+        <div class="artist-grid" id="artistGrid">
+            <!-- 기본 아티스트 1 -->
+            <div class="artist-card" onclick="openProfileModal('ASTRA V', 'Global Boy Group', '<i class=\'fa-solid fa-star\'></i>', '언제나 팬 여러분의 별이 되겠습니다!', '독보적인 퍼포먼스와 트렌디한 음악 색깔로 글로벌 무대를 사로잡는 아스트라의 대표 보이그룹입니다. 매 순간 한계 없는 도전을 이어가고 있습니다.')">
+                <div class="artist-avatar"><i class="fa-solid fa-star"></i></div>
+                <h4>ASTRA V</h4>
+                <span>Global Boy Group</span>
+                <div class="artist-quote-preview">
+                    <span>"언제나 팬 여러분의 별이 되겠습니다!"</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+            <!-- 기본 아티스트 2 -->
+            <div class="artist-card" onclick="openProfileModal('LUNA', 'Solo Vocalist', '<i class=\'fa-solid fa-moon\'></i>', '달빛처럼 지친 마음을 포근하게 채워줄게요.', '깊은 울림을 주는 보이스와 감성적인 자작곡으로 수많은 리스너들의 마음을 적시는 솔로 아티스트 루나입니다.')">
+                <div class="artist-avatar"><i class="fa-solid fa-moon"></i></div>
+                <h4>LUNA</h4>
+                <span>Solo Vocalist</span>
+                <div class="artist-quote-preview">
+                    <span>"달빛처럼 지친 마음을 포근하게 채워줄게요."</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+            <!-- 기본 아티스트 3 -->
+            <div class="artist-card" onclick="openProfileModal('NEXUS', 'Performance Unit', '<i class=\'fa-solid fa-bolt\'></i>', '무대 위에서는 우리가 세상의 중심이다!', '강렬한 비트와 파워풀한 군무로 매 순간 무대를 압도하는 차세대 실력파 퍼포먼스 유닛 넥서스입니다.')">
+                <div class="artist-avatar"><i class="fa-solid fa-bolt"></i></div>
+                <h4>NEXUS</h4>
+                <span>Performance Unit</span>
+                <div class="artist-quote-preview">
+                    <span>"무대 위에서는 우리가 세상의 중심이다!"</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 스케줄 섹션 -->
+    <section id="schedule">
+        <h2 class="section-title">SCHEDULE</h2>
+        <p class="section-desc">아스트라 아티스트들의 향후 주요 활동 및 공식 일정입니다.</p>
+        <div class="schedule-timeline" id="scheduleContainer">
+            <div class="schedule-item">
+                <div class="schedule-content">
+                    <div class="schedule-date">2026. 04. 10</div>
+                    <h4>ASTRA V 미니앨범 발매</h4>
+                    <p>세 번째 미니앨범 [ODYSSEY] 전 세계 동시 음원 공개</p>
+                </div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-content">
+                    <div class="schedule-date">2026. 04. 25</div>
+                    <h4>LUNA 단독 콘서트</h4>
+                    <p>첫 번째 서울 단독 콘서트 'MOONLIGHT' 개최</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 뉴스 섹션 -->
+    <section id="news">
+        <h2 class="section-title">NEWS & NOTICE</h2>
+        <p class="section-desc">아스트라 엔터테인먼트의 가장 빠른 소식을 전해드립니다.</p>
+        <div class="news-container" id="newsContainer">
+            <div class="news-item" onclick="toggleNews(this)">
+                <div class="news-header">
+                    <span class="news-title">[공지] 아스트라 엔터테인먼트 공식 글로벌 팬클럽 창단 안내</span>
+                    <span class="news-date">2026.04.01</span>
+                </div>
+                <div class="news-body">
+                    안녕하세요, 아스트라 엔터테인먼트입니다. 아스트라와 함께 미래를 만들어갈 공식 글로벌 팬클럽 모집이 시작됩니다. 팬 여러분의 많은 관심과 성원을 부탁드립니다.
+                </div>
+            </div>
+            <div class="news-item" onclick="toggleNews(this)">
+                <div class="news-header">
+                    <span class="news-title">[보도자료] ASTRA V, 빌보드 글로벌 차트 상위권 석권 쾌거</span>
+                    <span class="news-date">2026.03.20</span>
+                </div>
+                <div class="news-body">
+                    그룹 ASTRA V가 신곡으로 전 세계 주요 음악 차트 상위권을 동시에 석권하며 글로벌 최정상 아이돌로서의 저력을 증명했습니다.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 아티스트 상세 프로필 모달 (프로필 클릭 시 한마디 & 하고 싶은 말 출력) -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="admin-modal">
+            <div class="profile-modal-content">
+                <div class="profile-modal-avatar" id="modalProfileIcon"><i class="fa-solid fa-star"></i></div>
+                <h3 id="modalProfileName" style="margin-bottom: 5px;">ARTIST NAME</h3>
+                <span id="modalProfileSub" style="color:var(--accent-color); font-size:0.85rem; font-weight:600; letter-spacing:2px; text-transform:uppercase;">Category</span>
+                
+                <div class="profile-modal-quote" id="modalProfileQuote">
+                    "한마디 메시지가 여기에 표시됩니다."
+                </div>
+                
+                <div class="profile-modal-desc" id="modalProfileDesc">
+                    하고 싶은 말 및 상세 소개 내용이 여기에 출력됩니다.
+                </div>
+            </div>
+            <div class="modal-actions" style="margin-top: 15px;">
+                <button class="btn-close" onclick="closeProfileModal()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 관리자 로그인 모달 -->
+    <div class="modal-overlay" id="adminModal">
+        <div class="admin-modal">
+            <h3>MANAGER PORTAL</h3>
+            <div class="form-group">
+                <label>관리자 비밀번호</label>
+                <input type="password" id="adminPassword" placeholder="비밀번호를 입력하세요 (기본: 1234)">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-submit" onclick="verifyAdmin()">로그인</button>
+                <button class="btn-close" onclick="closeAdminModal()">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 콘텐츠 추가 모달 (관리자용 - 아티스트 추가 시 한마디/하고 싶은 말까지 입력 가능하게 확장) -->
+    <div class="modal-overlay" id="contentModal">
+        <div class="admin-modal">
+            <h3 id="modalTitle">새 콘텐츠 등록</h3>
+            <div class="form-group">
+                <label>콘텐츠 유형</label>
+                <select id="contentType" style="width:100%; padding:12px; background:var(--bg-secondary); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:var(--text-bright);" onchange="updateFormFields()">
+                    <option value="artist">아티스트 추가</option>
+                    <option value="schedule">스케줄 추가</option>
+                    <option value="news">뉴스/공지 추가</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label id="labelTitle">아티스트명 / 제목</label>
+                <input type="text" id="inputField1" placeholder="예: ASTRA V">
+            </div>
+            <div class="form-group">
+                <label id="labelSub">태그 / 날짜</label>
+                <input type="text" id="inputField2" placeholder="예: Global Boy Group 또는 2026.05.01">
+            </div>
+            <div class="form-group">
+                <label id="labelQuote">한마디 메시지 (아티스트 전용)</label>
+                <input type="text" id="inputFieldQuote" placeholder="예: 언제나 팬 여러분의 별이 되겠습니다!">
+            </div>
+            <div class="form-group">
+                <label id="labelDesc">상세 설명 / 하고 싶은 말</label>
+                <textarea id="inputField3" rows="3" placeholder="상세 내용이나 하고 싶은 말을 입력하세요..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-submit" onclick="saveNewContent()">등록하기</button>
+                <button class="btn-close" onclick="closeContentModal()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 관리자 활성화 플로팅 바 -->
+    <div class="admin-control-bar" id="adminControlBar">
+        <span><i class="fa-solid fa-user-gear"></i> 관리자 모드 활성화됨</span>
+        <button onclick="openContentModal()">+ 콘텐츠 추가</button>
+        <button onclick="logoutAdmin()" style="background:var(--danger-color); color:white;">로그아웃</button>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>&copy; 2026 ASTRA ENTERTAINMENT. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 배경 별자리 자동 생성 효과
+        const starfield = document.getElementById('starfield');
+        const starCount = 80;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+            starfield.appendChild(star);
+        }
+
+        // 뉴스 아코디언 토글 기능
+        function toggleNews(element) {
+            element.classList.toggle('active');
+        }
+
+        // 아티스트 프로필 모달 제어 (클릭 시 한마디와 하고 싶은 말 출력)
+        function openProfileModal(name, sub, iconHtml, quote, desc) {
+            document.getElementById('modalProfileName').innerText = name;
+            document.getElementById('modalProfileSub').innerText = sub;
+            document.getElementById('modalProfileIcon').innerHTML = iconHtml;
+            document.getElementById('modalProfileQuote').innerText = `"${quote || '환영합니다!'}"`;
+            document.getElementById('modalProfileDesc').innerText = desc || '상세 정보가 없습니다.';
+            document.getElementById('profileModal').classList.add('open');
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.remove('open');
+        }
+
+        // 관리자 모달 제어
+        function openAdminModal() {
+            if(localStorage.getItem('isAstraAdmin') === 'true') {
+                alert('이미 관리자 로그인 상태입니다.');
+                return;
+            }
+            document.getElementById('adminModal').classList.add('open');
+        }
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.remove('open');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // 관리자 비밀번호 검증 (기본: 1234)
+        function verifyAdmin() {
+            const pwd = document.getElementById('adminPassword').value;
+            if(pwd === '1234') {
+                localStorage.setItem('isAstraAdmin', 'true');
+                closeAdminModal();
+                checkAdminStatus();
+                alert('관리자 로그인이 완료되었습니다.');
+            } else {
+                alert('비밀번호가 틀렸습니다. (기본: 1234)');
+            }
+        }
+
+        function logoutAdmin() {
+            localStorage.setItem('isAstraAdmin', 'false');
+            checkAdminStatus();
+            alert('관리자 모드가 해제되었습니다.');
+        }
+
+        function checkAdminStatus() {
+            const isAdmin = localStorage.getItem('isAstraAdmin') === 'true';
+            const controlBar = document.getElementById('adminControlBar');
+            if(isAdmin) {
+                controlBar.classList.add('active');
+            } else {
+                controlBar.classList.remove('active');
+            }
+        }
+
+        // 콘텐츠 추가 모달창 제어
+        function openContentModal() {
+            document.getElementById('contentModal').classList.add('open');
+            updateFormFields();
+        }
+        function closeContentModal() {
+            document.getElementById('contentModal').classList.remove('open');
+        }
+
+        function updateFormFields() {
+            const type = document.getElementById('contentType').value;
+            const l1 = document.getElementById('labelTitle');
+            const l2 = document.getElementById('labelSub');
+            const l3 = document.getElementById('labelDesc');
+            const quoteGroup = document.getElementById('labelQuote').parentElement;
+            
+            if(type === 'artist') {
+                l1.innerText = '아티스트명';
+                l2.innerText = '포지션 / 장르 (예: Soloist)';
+                l3.innerText = '하고 싶은 말 / 상세 소개';
+                quoteGroup.style.display = 'block';
+            } else {
+                l1.innerText = type === 'schedule' ? '스케줄 제목' : '뉴스 / 공지 제목';
+                l2.innerText = '날짜 (예: 2026.05.01)';
+                l3.innerText = '본문 상세 내용';
+                quoteGroup.style.display = 'none'; // 아티스트 외에는 한마디 입력창 숨김
+            }
+        }
+
+        // 새 콘텐츠 저장 로직 (로컬스토리지 반영)
+        function saveNewContent() {
+            const type = document.getElementById('contentType').value;
+            const val1 = document.getElementById('inputField1').value;
+            const val2 = document.getElementById('inputField2').value;
+            const val3 = document.getElementById('inputField3').value;
+            const valQuote = document.getElementById('inputFieldQuote').value;
+
+            if(!val1 || !val2 || !val3) {
+                alert('모든 항목을 빠짐없이 입력해 주세요.');
+                return;
+            }
+
+            const dataKey = 'astra_' + type + 's';
+            let existingData = JSON.parse(localStorage.getItem(dataKey)) || [];
+            
+            if(type === 'artist') {
+                existingData.push({ title: val1, sub: val2, desc: val3, quote: valQuote });
+            } else {
+                existingData.push({ title: val1, sub: val2, desc: val3 });
+            }
+            
+            localStorage.setItem(dataKey, JSON.stringify(existingData));
+
+            alert('성공적으로 등록되었습니다!');
+            closeContentModal();
+            location.reload(); // 새로고침하여 반영
+        }
+
+        // 저장된 동적 데이터 불러오기
+        function loadDynamicContent() {
+            checkAdminStatus();
+
+            // 아티스트 로드 (로컬스토리지 데이터 추가 렌더링)
+            const artists = JSON.parse(localStorage.getItem('astra_artists')) || [];
+            const artistGrid = document.getElementById('artistGrid');
+            artists.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'artist-card';
+                const quoteText = item.quote || '팬 여러분 안녕하세요!';
+                const descText = item.desc || '소개 내용이 없습니다.';
+                
+                card.setAttribute('onclick', `openProfileModal('${item.title}', '${item.sub}', '<i class=\'fa-solid fa-microphone-lines\'></i>', '${quoteText}', '${descText}')`);
+                
+                card.innerHTML = `
+                    <div class="artist-avatar"><i class="fa-solid fa-microphone-lines"></i></div>
+                    <h4>${item.title}</h4>
+                    <span>${item.sub}</span>
+                    <div class="artist-quote-preview">
+                        <span>"${quoteText}"</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                `;
+                artistGrid.appendChild(card);
+            });
+
+            // 스케줄 로드
+            const schedules = JSON.parse(localStorage.getItem('astra_schedules')) || [];
+            const scheduleContainer = document.getElementById('scheduleContainer');
+            schedules.forEach(item => {
+                const sItem = document.createElement('div');
+                sItem.className = 'schedule-item';
+                sItem.innerHTML = `
+                    <div class="schedule-content">
+                        <div class="schedule-date">${item.sub}</div>
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                `;
+                scheduleContainer.appendChild(sItem);
+            });
+
+            // 뉴스 로드
+            const newsList = JSON.parse(localStorage.getItem('astra_news')) || [];
+            const newsContainer = document.getElementById('newsContainer');
+            newsList.forEach(item => {
+                const nItem = document.createElement('div');
+                nItem.className = 'news-item';
+                nItem.setAttribute('onclick', 'toggleNews(this)');
+                nItem.innerHTML = `
+                    <div class="news-header">
+                        <span class="news-title">${item.title}</span>
+                        <span class="news-date">${item.sub}</span>
+                    </div>
+                    <div class="news-body">${item.desc}</div>
+                `;
+                newsContainer.appendChild(nItem);
+            });
+        }
+
+        // 페이지 로드 시 실행
+        window.onload = loadDynamicContent;
+    </script>
+</body>
+</html>

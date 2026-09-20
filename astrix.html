@@ -1123,29 +1123,47 @@
 
     function renderArtists() {
         const grid = document.getElementById('artistGrid');
+        if (!grid) return;
+
         grid.innerHTML = artists.map(a => {
             const avatarContent = a.imageUrl
-                ? `<img src="${a.imageUrl}" alt="${a.name}">`
-                : a.name.charAt(0);
+                ? `<img src="${esc(a.imageUrl)}" alt="${esc(a.name)}">`
+                : esc(a.name.charAt(0));
+
             return `
-                <div class="artist-card profile-link" role="link" tabindex="0"
-                     onclick="openArtistProfile('${a.id}')"
-                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openArtistProfile('${a.id}')}">
+                <div class="artist-card profile-link" role="link" tabindex="0" data-artist-id="${esc(a.id)}">
                     <div class="item-admin-controls" onclick="event.stopPropagation();">
                         <button class="icon-btn" onclick="openArtistModal('${a.id}')" title="수정">✎</button>
                         <button class="icon-btn danger" onclick="deleteItem('artists', '${a.id}')" title="삭제">✕</button>
                     </div>
                     <div class="artist-avatar" style="background:${a.imageUrl ? 'transparent' : (a.color || '#d4af7a')};">${avatarContent}</div>
-                    <span class="artist-group-tag">${a.group}</span>
+                    <span class="artist-group-tag">${esc(a.group)}</span>
                     <div class="artist-header-row">
-                        <h3>${a.name}</h3>
-                        ${a.handle ? `<span class="artist-handle">${a.handle}</span>` : ''}
+                        <h3>${esc(a.name)}</h3>
+                        ${a.handle ? `<span class="artist-handle">${esc(a.handle)}</span>` : ''}
                     </div>
-                    <p class="artist-role">${a.role}</p>
-                    <p class="artist-bio">${a.bio || ''}</p>
+                    <p class="artist-role">${esc(a.role)}</p>
+                    <p class="artist-bio">${esc(a.bio || '')}</p>
                 </div>
             `;
         }).join('');
+
+        // 모듈 스크립트에서도 확실하게 카드 클릭을 연결한다.
+        grid.querySelectorAll('.artist-card.profile-link').forEach(card => {
+            const open = (event) => {
+                if (event.target.closest('.item-admin-controls')) return;
+                const id = card.dataset.artistId;
+                if (id) openArtistProfile(id);
+            };
+
+            card.addEventListener('click', open);
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    open(event);
+                }
+            });
+        });
     }
 
     function renderArtistProfile(id) {
@@ -1187,10 +1205,16 @@
         const match = location.hash.match(/^#profile\/(.+)$/);
         const isProfile = !!match;
         document.body.classList.toggle('profile-view', isProfile);
+
+        const profilePage = document.getElementById('artistProfilePage');
+        const mainSite = document.getElementById('mainSite');
+
         if (isProfile) {
             const id = decodeURIComponent(match[1]);
             renderArtistProfile(id);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (profilePage) profilePage.scrollIntoView({ block: 'start' });
+        } else {
+            if (mainSite) window.scrollTo({ top: 0, behavior: 'auto' });
         }
     }
 

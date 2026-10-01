@@ -439,162 +439,63 @@
     .career li { padding-bottom: 10px; border-bottom: 1px solid rgba(245,243,236,0.05); }
     .career b { color: var(--gold-soft); font-weight: 500; margin-right: 5px; }
 
-    /* ===== 아티스트 ===== */
-    .artist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 26px; }
-    .artist-card {
-        background: var(--bg-panel);
-        border: 1px solid var(--line);
-        border-radius: 4px;
-        padding: 30px 26px;
-        position: relative;
-        transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-    }
-    .artist-card:hover {
-        transform: translateY(-6px);
-        border-color: rgba(212,175,122,0.45);
-        box-shadow: var(--shadow-deep);
-    }
-    .artist-avatar {
-        width: 64px; height: 64px;
-        border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-family: 'Playfair Display', serif;
-        font-size: 1.3rem; font-weight: 600;
-        color: #0c0e1a;
-        margin-bottom: 22px;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-        overflow: hidden;
-    }
-    .artist-avatar img { width: 100%; height: 100%; object-fit: cover; }
+/* ===== 아티스트 ===== */
+.artist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 18px;
+}
 
-    .artist-group-tag { font-size: 0.68rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; display: block; }
+.artist-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 18px;
+    position: relative;
+    transition: transform 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+}
+
+.artist-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0c0e1a;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+
+.artist-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-card h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+}
+
+.artist-role {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.artist-bio {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
     
-    .artist-header-row {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 4px;
-    }
-    .artist-card h3 { font-family: 'Noto Serif KR', serif; font-size: 1.2rem; }
-    .artist-handle {
-        font-size: 0.78rem;
-        color: var(--lavender);
-        letter-spacing: 0.04em;
-    }
-
-    .artist-role { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; }
-    .artist-bio { font-size: 0.86rem; color: var(--text-dim); line-height: 1.55; }
-    .artist-card.profile-link { cursor: pointer; }
-    .artist-card.profile-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-    .artist-profile-page {
-        display: none;
-        min-height: 100vh;
-        padding: 150px 6vw 100px;
-        position: relative;
-        z-index: 2;
-    }
-    body.profile-view .main-site { display: none; }
-    body.profile-view .artist-profile-page { display: block; }
-    .profile-page-inner { max-width: 980px; margin: 0 auto; }
-    .profile-back {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        color: var(--text-muted);
-        font-size: .82rem;
-        letter-spacing: .08em;
-        margin-bottom: 42px;
-        transition: color .25s ease, transform .25s ease;
-    }
-    .profile-back:hover { color: var(--gold-soft); transform: translateX(-3px); }
-    .profile-hero-card {
-        position: relative;
-        display: grid;
-        grid-template-columns: 260px 1fr;
-        gap: 56px;
-        align-items: center;
-        padding: 52px;
-        background:
-            radial-gradient(circle at 15% 20%, rgba(212,175,122,.10), transparent 30%),
-            var(--bg-panel);
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow-deep);
-        overflow: hidden;
-    }
-    .profile-hero-card::after {
-        content: '✦';
-        position: absolute;
-        right: 32px;
-        top: 20px;
-        font-family: Georgia, serif;
-        font-size: 5rem;
-        color: rgba(212,175,122,.07);
-    }
-    .profile-avatar-large {
-        width: 220px;
-        height: 220px;
-        margin: 0 auto;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border: 1px solid rgba(212,175,122,.55);
-        background: radial-gradient(circle, rgba(212,175,122,.22), rgba(212,175,122,.04));
-        color: var(--gold-soft);
-        font-family: 'Playfair Display', serif;
-        font-size: 4rem;
-        box-shadow: 0 0 55px rgba(212,175,122,.10);
-    }
-    .profile-avatar-large img { width: 100%; height: 100%; object-fit: cover; }
-    .profile-kicker {
-        display: block;
-        color: var(--gold);
-        font-size: .7rem;
-        letter-spacing: .22em;
-        margin-bottom: 12px;
-    }
-    .profile-name {
-        font-family: 'Noto Serif KR', serif;
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        line-height: 1.15;
-        margin-bottom: 10px;
-    }
-    .profile-handle { color: var(--lavender); font-size: .9rem; margin-bottom: 10px; }
-    .profile-role { color: var(--text-muted); font-size: .95rem; }
-    .profile-message {
-        margin-top: 38px;
-        padding: 30px 32px;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
-    }
-    .profile-message-label {
-        color: var(--gold);
-        font-size: .68rem;
-        letter-spacing: .18em;
-        margin-bottom: 12px;
-    }
-    .profile-message-text {
-        font-family: 'Noto Serif KR', serif;
-        font-size: clamp(1.15rem, 2.5vw, 1.55rem);
-        line-height: 1.8;
-        color: var(--star-white);
-        white-space: pre-wrap;
-        word-break: keep-all;
-    }
-    .profile-empty {
-        color: var(--text-dim);
-        font-size: .92rem;
-    }
-    @media (max-width: 700px) {
-        .profile-hero-card { grid-template-columns: 1fr; gap: 34px; padding: 34px 24px; }
-        .profile-avatar-large { width: 170px; height: 170px; font-size: 3rem; }
-        .profile-message { padding: 24px 0; }
-        .artist-profile-page { padding-top: 125px; }
-    }
-
-
     /* ===== 스케줄 (타임라인) ===== */
     .schedule-list { position: relative; padding-left: 28px; border-left: 1px solid var(--line); }
     .schedule-item { position: relative; padding: 0 0 40px 30px; }
